@@ -9,8 +9,8 @@ using fullClean.Infractucture;
 namespace fullClean.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220401022427_nuevaMigracion")]
-    partial class nuevaMigracion
+    [Migration("20220412031011_primeraMigracion")]
+    partial class primeraMigracion
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -48,6 +48,33 @@ namespace fullClean.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("fullClean.Dominio.Models.Sales", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("codproduct")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("detailproduct")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("nameproduct")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("price")
+                        .HasColumnType("int");
+
+                    b.Property<int>("quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Sales");
                 });
 #pragma warning restore 612, 618
         }

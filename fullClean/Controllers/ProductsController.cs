@@ -9,7 +9,6 @@ using fullClean.Dominio.Models;
 using fullClean.Dto;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace fullClean.Controllers
 {
@@ -24,7 +23,7 @@ namespace fullClean.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost]
+        [HttpPost("api/[controller]/AddProducts")]
         public async Task<ActionResult<Products>> AddProducts(Products products) {
             await _unitOfWork.products.AddT(products);
             _unitOfWork.saveData();

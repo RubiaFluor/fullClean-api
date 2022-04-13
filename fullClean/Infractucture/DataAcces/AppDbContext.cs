@@ -12,5 +12,7 @@ namespace fullClean.Infractucture
         }
 
         public DbSet<Products> Products { get; set; }
+        public DbSet<Sales> Sales { get; set; }
+        public DbSet<Cart> Cart { get; set; }
     }
 }

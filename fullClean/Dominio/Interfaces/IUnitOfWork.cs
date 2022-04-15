@@ -5,7 +5,7 @@ namespace fullClean.Dominio.Interfaces
     {
       IProducts products { get; }
       ISales sales { get; }
-      ICart cart { get; }
+      
       void saveData();
 
     }

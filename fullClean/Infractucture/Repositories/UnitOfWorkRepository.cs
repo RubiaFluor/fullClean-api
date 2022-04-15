@@ -9,14 +9,13 @@ namespace fullClean.Infractucture.Repositories
         public IProducts products { get; private set; }
 
         public ISales sales {get; private set;}
-        public ICart cart { get; private set; }
 
         public UnitOfWorkRepository(AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
             products = new ProductsRepository(appDbContext);
             sales = new SalesRepository(appDbContext);
-            cart = new CartRepository(appDbContext);
+        
         }
 
         public void saveData()

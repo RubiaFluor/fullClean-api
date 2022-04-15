@@ -24,6 +24,8 @@
     <None Remove="Microsoft.AspNetCore.Mvc.NewtonsoftJson" />
     <None Remove="Dto\" />
     <None Remove="MapperProfile\" />
+    <None Remove="System.Data.Entity.Repository" />
+    <None Remove="Infractucture\Utilities\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Infractucture\" />
@@ -35,6 +37,7 @@
     <Folder Include="Controllers\" />
     <Folder Include="Dto\" />
     <Folder Include="MapperProfile\" />
+    <Folder Include="Infractucture\Utilities\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.12" />

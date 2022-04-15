@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using fullClean.Dominio.Interfaces;
 using fullClean.Infractucture;
 using fullClean.Infractucture.Repositories;
+using fullClean.MapperProfile;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -37,7 +39,9 @@ namespace fullClean
             services.AddControllers()
             .AddNewtonsoftJson();
 
-            services.AddAutoMapper(typeof(Startup));
+            IMapper mapper = MappingConfiguration.registerMap().CreateMapper();
+            services.AddSingleton(mapper);
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlServer")));
             services.AddScoped<IUnitOfWork, UnitOfWorkRepository>();

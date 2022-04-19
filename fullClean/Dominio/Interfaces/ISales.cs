@@ -1,9 +1,8 @@
-﻿using System;
-using fullClean.Dominio.Models;
+﻿using fullClean.Dominio.Models;
 
 namespace fullClean.Dominio.Interfaces
 {
-    public interface ISales: IGeneralRepository<Sales>
+    public interface ISales: IGeneralRepository<SaleModel>
     {
 
     }

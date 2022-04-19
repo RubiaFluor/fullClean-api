@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using fullClean.Dominio.Models;
+﻿using fullClean.Dominio.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace fullClean.Infractucture
@@ -11,17 +9,17 @@ namespace fullClean.Infractucture
         {
         }
 
-
+        //Api fluent
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<SalesAndProducts>().HasKey(x => new { x.Idproducts, x.Idsales });
+           modelBuilder.Entity<SalesAndProductsModel>().HasKey(x => new { x.ProductsId, x.SalesId });
 
-            base.OnModelCreating(modelBuilder);
+           base.OnModelCreating(modelBuilder);
         }
-        public DbSet<Products> Products { get; set; }
-        public DbSet<Sales> Sales { get; set; }
+        public DbSet<ProductModel> Product { get; set; }
+        public DbSet<SaleModel> Sale { get; set; }
         //relacion entre ventas y productos
-        public DbSet<SalesAndProducts> SalesAndProducts { get; set; }
+        public DbSet<SalesAndProductsModel> SalesAndProducts { get; set; }
       
 
     }

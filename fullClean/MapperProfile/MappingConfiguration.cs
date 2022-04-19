@@ -12,33 +12,24 @@ namespace fullClean.MapperProfile
         {
             var mapping = new MapperConfiguration(config =>
             {
-                config.CreateMap<SalesDto, Sales>().ReverseMap();
-                config.CreateMap<ProductDto, Products>().ReverseMap();
-                config.CreateMap<Sales, UpsertSalesDto>().ReverseMap()
-                    .ForMember(x => x.SalesAndProductslist, options => options.MapFrom(salesAndProductsMap));
-            
+                config.CreateMap<SaleModel, SalesDto>().ReverseMap()
+                .ForMember(x => x.SalesAndProducts, options => options.MapFrom(MapSalesAndProducts));
+                config.CreateMap<ProductDto, ProductModel>().ReverseMap();
             });
-                List<SalesAndProducts> salesAndProductsMap(UpsertSalesDto upsertSalesDto, Sales sales)
+
+            List<SalesAndProductsModel> MapSalesAndProducts(SalesDto salesDto, SaleModel salesModel)
+            {
+                var Result = new List<SalesAndProductsModel>();
+                if (salesDto.Products == null) { return Result; }
+                foreach( var product in salesDto.Products) //productsId hacia SalesAndProducts
                 {
-                    var result = new List<SalesAndProducts>();
-                    if (upsertSalesDto.productsIds == null)
-                    {
-                        return result;
-                    }
-
-                    foreach (var id in upsertSalesDto.productsIds)
-                    {
-                        result.Add(new SalesAndProducts()
-                        {
-                            Idproducts = id,
-
-                        });
-                    }
-
-                    return result;
+                    Result.Add( new SalesAndProductsModel() 
+                    { ProductsId = product.ProductsId, QuantityProduct = product.QuantityProduct});
                 }
-            return mapping;
+                return Result;
+            }
 
+            return mapping;
         }
     }
 }

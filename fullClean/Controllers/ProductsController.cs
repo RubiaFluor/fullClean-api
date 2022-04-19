@@ -12,7 +12,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace fullClean.Controllers
 {
-    //[Route("api/[controller]")]
+    [Route("api/[controller]")]
+    [ApiController]
     public class ProductsController : Controller
     { 
         private readonly IMapper _mapper;
@@ -23,8 +24,8 @@ namespace fullClean.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost("api/[controller]/AddProducts")]
-        public async Task<ActionResult<Products>> AddProducts(Products products) {
+        [HttpPost]
+        public async Task<ActionResult<ProductModel>> AddProducts(ProductModel products) {
             await _unitOfWork.products.AddT(products);
             _unitOfWork.saveData();
 
@@ -32,7 +33,7 @@ namespace fullClean.Controllers
             
         }
 
-        [HttpGet("api/[controller]/getAllProducts")]
+        [HttpGet]
         public async Task<List<ProductDto>> getAllProducts()
         {
             var listProduct = await _unitOfWork.products.GetAll();

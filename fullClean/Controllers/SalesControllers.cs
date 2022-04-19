@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace fullClean.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class SalesControllers : Controller
     {
         private readonly IMapper _mapper;
@@ -18,13 +20,13 @@ namespace fullClean.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost("api/[controller]/AddSales")]
-        public async Task<ActionResult<UpsertSalesDto>> AddSales(UpsertSalesDto upsertSalesDto)
+        [HttpPost]
+        public async Task<ActionResult> AddSales(SalesDto salesDto)
         {
-            var salesModel = _mapper.Map<Sales>(upsertSalesDto);
+            var salesModel = _mapper.Map<SaleModel>(salesDto);
             await _unitOfWork.sales.AddT(salesModel);
             _unitOfWork.saveData();
-            return upsertSalesDto;
+            return Ok();
             
         }
     }

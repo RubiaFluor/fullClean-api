@@ -3,7 +3,7 @@ using fullClean.Dominio.Models;
 
 namespace fullClean.Dominio.Interfaces
 {
-    public interface IProducts: IGeneralRepository<Products>
+    public interface IProducts: IGeneralRepository<ProductModel>
     {
 
     }

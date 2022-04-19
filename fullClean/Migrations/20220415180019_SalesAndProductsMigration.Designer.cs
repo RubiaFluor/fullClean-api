@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using fullClean.Infractucture;
 
 namespace fullClean.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220415180019_SalesAndProductsMigration")]
+    partial class SalesAndProductsMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,8 +79,8 @@ namespace fullClean.Migrations
                     b.Property<int>("SalesId")
                         .HasColumnType("int");
 
-                    b.Property<int>("QuantityProduct")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("dateSale")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("ProductsId", "SalesId");
 
@@ -90,13 +92,13 @@ namespace fullClean.Migrations
             modelBuilder.Entity("fullClean.Dominio.Models.SalesAndProductsModel", b =>
                 {
                     b.HasOne("fullClean.Dominio.Models.ProductModel", "Products")
-                        .WithMany("SalesAndProducts")
+                        .WithMany()
                         .HasForeignKey("ProductsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("fullClean.Dominio.Models.SaleModel", "Sales")
-                        .WithMany("SalesAndProducts")
+                        .WithMany()
                         .HasForeignKey("SalesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -104,16 +106,6 @@ namespace fullClean.Migrations
                     b.Navigation("Products");
 
                     b.Navigation("Sales");
-                });
-
-            modelBuilder.Entity("fullClean.Dominio.Models.ProductModel", b =>
-                {
-                    b.Navigation("SalesAndProducts");
-                });
-
-            modelBuilder.Entity("fullClean.Dominio.Models.SaleModel", b =>
-                {
-                    b.Navigation("SalesAndProducts");
                 });
 #pragma warning restore 612, 618
         }
